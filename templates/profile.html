@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - UserID System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .profile-wrapper {
+            background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .profile-card {
+            max-width: 800px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            background: rgba(13, 110, 253, 0.1);
+            border-radius: 15px 15px 0 0;
+            padding: 2rem 1rem;
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">UserID System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light ms-2" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-wrapper">
+        <div class="container">
+            <div class="profile-card mx-auto">
+                <div class="profile-header text-center">
+                    <img src="data:image/jpeg;base64,{{ user.profile_photo }}" 
+                         alt="Profile Photo" class="profile-photo mb-3">
+                    <h4 class="mb-0">{{ user.first_name }} {{ user.last_name }}</h4>
+                    <p class="text-muted small mb-0">{{ user.email }}</p>
+                </div>
+                
+                <div class="p-4">
+                    <h5 class="mb-4">Profile Information</h5>
+                    <form action="{{ url_for('update_profile') }}" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label">Update Profile Photo</label>
+                            <input type="file" class="form-control" name="profilePhoto" accept="image/*">
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="firstName" 
+                                       value="{{ user.first_name }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="lastName" 
+                                       value="{{ user.last_name }}" required>
+                            </div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mobile</label>
+                                <input type="text" class="form-control" name="mobile" 
+                                       value="{{ user.mobile }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" name="dob" 
+                                       value="{{ user.dob }}" required>
+                            </div>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label class="form-label">Age</label>
+                            <input type="number" class="form-control" name="age" 
+                                   value="{{ user.age }}" readonly>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea class="form-control" name="address" rows="3">{{ user.address }}</textarea>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="email" 
+                                   value="{{ user.email }}" required>
+                        </div>
+                
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Back to Home</a>
+                        </div>
+                    </form>
+                </div>
+                 
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-success mt-4 text-center mx-auto" style="max-width: 800px;">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
