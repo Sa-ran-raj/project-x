@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Unique QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+        .qr-container {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 80%;
+        }
+        .qr-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .qr-container {
+                padding: 15px;
+            }
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Unique QR Code</h1>
+    <p>Scan this QR code to access your account:</p>
+    <div class="qr-container">
+        <img src="{{ qr_code_url }}" alt="QR Code">
+    </div>
+    <br>
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+</body>
+</html>

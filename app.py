@@ -7,6 +7,9 @@ from functools import wraps
 from bson import ObjectId
 import base64
 from datetime import datetime
+from io import BytesIO
+import qrcode  # Importing qrcode library
+from flask import send_file 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -16,6 +19,7 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['user_identification_system']
 users_collection = db['users']
 notes_collection = db['notes']
+
 
 def calculate_profile_completion(user_data):
     total_fields = 6
@@ -233,6 +237,39 @@ def update_profile():
 
     flash("Profile updated successfully!")
     return redirect(url_for('profile'))
+
+
+@app.route('/generate_qr_code/<user_id>')
+def generate_qr_code(user_id):
+    # Generate a unique URL for QR login for each user
+    login_url = f"http://127.0.0.1:5000/qr_login?user_id={user_id}"
+    qr = qrcode.make(login_url)
+    img_io = BytesIO()
+    qr.save(img_io, 'PNG')
+    img_io.seek(0)
+    return send_file(img_io, mimetype='image/png')
+
+@app.route('/qr_login')
+def qr_login():
+    user_id = request.args.get('user_id')
+    if not user_id:
+        flash("Invalid QR code. Please try again.", "warning")
+        return redirect(url_for('login'))
+
+    user = users_collection.find_one({"_id": ObjectId(user_id)})
+    if user:
+        session['user_id'] = str(user['_id'])
+        flash("Logged in via QR code successfully!")
+        return redirect(url_for('home'))
+    else:
+        flash("User not found. Please sign up first.", "warning")
+        return redirect(url_for('signup'))
+
+@app.route('/qr_code')
+@login_required
+def qr_code():
+    qr_code_url = url_for('generate_qr_code', user_id=session['user_id'])
+    return render_template('qr_code.html', qr_code_url=qr_code_url)
 
 if __name__ == '__main__':
     app.run(debug=True)
