@@ -11,6 +11,9 @@ from io import BytesIO
 import qrcode  # Importing qrcode library
 from flask import send_file 
 
+
+
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
@@ -270,6 +273,74 @@ def qr_login():
 def qr_code():
     qr_code_url = url_for('generate_qr_code', user_id=session['user_id'])
     return render_template('qr_code.html', qr_code_url=qr_code_url)
+
+
+
+
+
+
+from itsdangerous import URLSafeTimedSerializer
+from flask_mail import Mail, Message
+import secrets
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Use your email provider's SMTP server
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'saranraj1962006@gmail.com'  # Your email
+app.config['MAIL_PASSWORD'] = 'weyd upna cqzv sgcz'  # Your email password
+app.config['MAIL_DEFAULT_SENDER'] = 'saranraj1962006@gmail.com'
+
+mail = Mail(app)
+
+serializer = URLSafeTimedSerializer(app.secret_key)
+
+
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = users_collection.find_one({'email': email})
+        if user:
+            token = serializer.dumps(email, salt='password-reset-salt')
+            reset_url = url_for('reset_password', token=token, _external=True)
+            msg = Message('Password Reset Request',
+                          recipients=[email],
+                          body=f'To reset your password, visit the following link: {reset_url}')
+            mail.send(msg)
+            flash('An email has been sent with instructions to reset your password.', 'info')
+            return redirect(url_for('login'))
+        flash('Email address not found', 'error')
+    return render_template('forgot_password.html')
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    try:
+        email = serializer.loads(token, salt='password-reset-salt', max_age=3600)
+    except:
+        flash('The password reset link is invalid or has expired.', 'error')
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        new_password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        
+        if new_password != confirm_password:
+            flash('Passwords do not match.', 'error')
+            return render_template('reset_password.html')
+        
+        # Hash and update password
+        hashed_password = generate_password_hash(new_password)
+        update_result = users_collection.update_one({'email': email}, {'$set': {'password': hashed_password}})
+        
+        # Confirm update success
+        if update_result.modified_count > 0:
+            flash('Your password has been updated!', 'success')
+        else:
+            flash('Password update failed. Please try again.', 'error')
+
+        return redirect(url_for('login'))
+    
+    return render_template('reset_password.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
