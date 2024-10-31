@@ -44,11 +44,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Documentation</a>
+                        <a class="nav-link" href="documentation">Documentation</a>
                     </li>
                     {% if is_authenticated %}
                         <li class="nav-item dropdown">
@@ -129,6 +127,52 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{ url_for('login') }}"  style="text-decoration: none; color: inherit;"><div class="col-md-4">
+                    <div class="card feature-card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-file-lock" viewBox="0 0 16 16">
+                                    <path d="M8 5a1 1 0 0 1 1 1v1H7V6a1 1 0 0 1 1-1zm2 2.076V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v1.076c-.54.166-1 .597-1 1.224v2.4c0 .816.781 1.3 1.5 1.3h3c.719 0 1.5-.484 1.5-1.3V8.3c0-.627-.46-1.058-1-1.224z"/>
+                                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                </svg>
+                            </div>
+                            <h4>Forgot Password Recovery</h4>
+                            <p class="text-muted">Secure password recovery without compromising account security</p>
+                        </div>
+                    </div>
+                </a>    
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 shadow-sm">
+                        <a href="{{ url_for('qr_code') }}" style="text-decoration: none; color: inherit;"><div class="card-body text-center">
+                            <div class="icon-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
+                                    <path d="M2 2h2v2H2V2Z"/>
+                                    <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z"/>
+                                    <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z"/>
+                                    <path d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5h1v2h-1V6Zm-1 0H6v2h1v-2Zm0 3h1v2h-1v-2Zm1 0h1v2h-1v-2Z"/>
+                                </svg>
+                            </div>
+                            <h4>Unique QR Code Login</h4>
+                            <p class="text-muted">Quickly log in with a unique QR code for each user account</p>
+                        </div></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+                                    <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.26.26 0 0 0 .227-.079 3.023 3.023 0 0 0 .272-.365c.638-1.118 1.03-2.373 1.152-3.847a.5.5 0 0 1 .078-.22 8.741 8.741 0 0 0 .936-5.097c-.892-3.58-3.053-4.115-3.994-4.195ZM2.679 3.905c1.005 1.014 3.127 1.785 3.127 1.785-.716 3.375.237 5.852 1.936 7.653.689.615 1.303 1.148 1.833 1.621.586.443.997.79 1.186 1.036.187.246.37.356.52.404a.866.866 0 0 0 .757-.091 7.07 7.07 0 0 0 .748-.507c.265-.206.566-.397.816-.513 1.118-.627 2.184-.78 3.122-.877a.5.5 0 0 1 .75.385c-.034.114-.154.195-.425.346a.96.96 0 0 1-.662.042c-.478-.159-.496-.301-.492-.462l.006-.03a.85.85 0 0 1 .057-.233c.007-.02.022-.061.036-.096.352-1.046.027-1.866-.538-2.588a8.734 8.734 0 0 0-1.022-.958c-1.12-.858-2.664-1.633-4.093-.817-1.5.918-1.993 3.678-1.351 5.4.608 1.576 1.727 2.268 3.28 2.664 1.274.369 2.8.507 4.543.124.175-.04.324-.107.45-.174.11-.058.211-.101.234-.143.023-.042-.037-.112-.113-.158-.008-.005-.089-.05-.134-.055a2.02 2.02 0 0 0-1.445.573c-.344.347-.774.655-1.192.872-.419.216-.871.32-1.341.285-.377-.027-.703-.155-1.024-.278-.658-.29-1.18-.65-1.593-1.064.11.002.176.004.222.006.366.009.425.2.538.566.318 1.037-.27 1.099-.395 1.083-.008 0-.085-.005-.147-.021-.046-.009-.105-.027-.153-.045l.115.042a.86.86 0 0 1 .329.24.866.866 0 0 1 .133.292c.032.117.04.223.015.283C1.925 15.99 1.741 16 1.5 16H1c-.256 0-.513-.192-.687-.501a2.285 2.285 0 0 1-.135-.263A4.66 4.66 0 0 1 0 13.342a7.162 7.162 0 0 1 1.016-2.304C1.855 10.116 2.368 9.647 2.679 3.905Z"/>
+                                </svg>
+                            </div>
+                            <h4>User Protection</h4>
+                            <p class="text-muted">Advanced measures to protect user identities and prevent unauthorized access</p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </section>

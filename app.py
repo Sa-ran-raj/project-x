@@ -342,5 +342,14 @@ def reset_password(token):
     return render_template('reset_password.html')
 
 
+
+
+
+@app.route('/documentation')
+def documentation():
+    return render_template('documentation.html')
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

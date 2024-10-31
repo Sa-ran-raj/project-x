@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Identification System Features</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #495057;
+            padding-bottom: 60px; /* Ensures footer doesn’t overlap content */
+        }
+        h1, h2 {
+            color: #007bff;
+        }
+        .feature-section {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .feature-section:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        /* Footer Credits */
+        .footer-credits {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .qr-container {
+                padding: 15px;
+            }
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            margin-left: 43%;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            justify-content: center;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <h1 class="text-center mb-5">User Identification System Features</h1>
+
+    <div class="feature-section">
+        <h2>Secure Authentication</h2>
+        <p>Our system implements robust security measures to provide peace of mind for users and administrators alike. Through multi-factor authentication (MFA) and encryption, we ensure that user credentials remain safe from unauthorized access. The use of MongoDB enables secure storage with role-based access controls, which minimizes exposure to potential security threats. Additionally, we routinely audit our security protocols to stay ahead of emerging threats and maintain our high standards of data protection.</p>
+    </div>
+
+    <div class="feature-section">
+        <h2>Real-time Analytics</h2>
+        <p>Gain valuable insights with our real-time analytics, which enables administrators to monitor user activity, detect unusual patterns, and improve system efficiency. MongoDB's aggregation framework supports fast data processing, allowing us to deliver up-to-date insights on demand. With real-time analytics, organizations can detect and prevent potential security issues and ensure optimal performance for users across the board.</p>
+    </div>
+
+    <div class="feature-section">
+        <h2>Easy Integration</h2>
+        <p>Seamlessly connect our user identification system with your existing applications, regardless of your tech stack. Our solution supports flexible integration, thanks to MongoDB’s compatibility with various platforms and programming languages. This compatibility allows you to add identification features without extensive code modifications, ensuring a smooth, non-disruptive setup. The result is a streamlined user experience that can grow with your application.</p>
+    </div>
+
+    <div class="feature-section">
+        <h2>Forgot Password Recovery</h2>
+        <p>Our secure password recovery system makes it easy for users to regain account access without compromising security. Each password recovery request goes through a multi-step verification process, ensuring that only the rightful user can access the account. MongoDB stores recovery tokens securely, adding an extra layer of protection against unauthorized access attempts, keeping accounts and sensitive information safe.</p>
+    </div>
+
+    <div class="feature-section">
+        <h2>Unique QR Code Login</h2>
+        <p>Our unique QR code login feature offers a convenient and secure way for users to access their accounts. Each user has a personalized QR code that enables a quick login process while maintaining high security standards. Stored securely in MongoDB, each QR code is linked to the user’s specific account data, making this feature both efficient and safe, ensuring that only authorized users can access their data.</p>
+    </div>
+
+    <div class="feature-section">
+        <h2>User Protection</h2>
+        <p>User identity protection is a core focus of our system. We employ behavioral analysis to identify unusual login attempts, detect potential threats, and prevent unauthorized access. Utilizing MongoDB's advanced security features, we ensure all user data remains protected. By monitoring for signs of suspicious behavior, our system enables proactive responses to secure user identities and maintain trust in your platform.</p>
+    </div>
+    <br>
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+</div>
+
+<!-- Footer Credits -->
+<div class="footer-credits">
+    Team Members - Sam (Leader), Saran, Ram, Perarasu, Nishanth
+</div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
